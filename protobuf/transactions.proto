@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.justtechnologies.proto.type";
+option java_outer_classname = "TransactionsProto";
+
+option go_package = "github.com/justtechnologies/java-gprc-enum/protobuf/transactions";
+
+package transactions;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/duration.proto";
+import "protobuf/commons.proto";
+
+service Transactions {
+    rpc ListTransactions(google.protobuf.Empty) returns (ListTransactionResponse) {}
+}
+
+message ListTransactionResponse {
+    repeated Transaction transactions = 1;
+}
+
+message Transaction {
+    string id = 1;
+    google.protobuf.Timestamp timestamp = 2;
+    double amount = 3;
+    repeated commons.Side side = 4;
+}
